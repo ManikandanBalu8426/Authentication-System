@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - JWT Auth</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="dashboard-container" id="dashboard-content">
+        <h1 id="welcome-msg" style="text-align: center; margin-bottom: 2rem;">Welcome</h1>
+
+        <div class="profile-card">
+            <div class="profile-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="profile-details">
+                <p><strong>Username:</strong> <span id="profile-username"></span></p>
+                <p><strong>Email:</strong> <span id="profile-email"></span></p>
+                <p><strong>Role:</strong> <span id="profile-roles"></span></p>
+            </div>
+            <div style="margin-top: 2rem;">
+                <button class="btn-primary" onclick="confirmLogout()">Logout</button>
+            </div>
+        </div>
+
+        <div id="admin-section" class="hidden" style="margin-top: 3rem;">
+            <h2>Admin Panel - User Management</h2>
+            <div id="users-list" class="users-grid">
+                <!-- User cards will appear here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Access Denied Screen (Hidden) -->
+    <div id="access-denied" class="access-denied-container hidden">
+        <i class="fas fa-lock lock-icon"></i>
+        <h1>Access Denied</h1>
+        <p>You are not authorized to access this page.</p>
+        <button class="btn-secondary" onclick="window.location.reload()" style="margin-top: 2rem;">Back to
+            Dashboard</button>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Check auth on load
+        const token = localStorage.getItem('token');
+        if (!token) window.location.href = 'index.html';
+
+        loadDashboard();
+    </script>
+</body>
+
+</html>
